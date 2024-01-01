@@ -2,8 +2,8 @@ import Homepage from "./components/homepage";
 
 function App() {
   return (
-    <div className="text-red-400">
-      Landing Page<br></br>
+    <div className=" border-yellow-400 border-4 mx-48">
+      main box
       <Homepage/>
     </div>
   );

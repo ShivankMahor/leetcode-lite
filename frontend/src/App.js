@@ -1,7 +1,10 @@
+import Homepage from "./components/homepage";
+
 function App() {
   return (
     <div className="text-red-400">
-      Leetcode Lite
+      Landing Page<br></br>
+      <Homepage/>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 function HomePageTags({data}){
   return(
-    <div>{data}</div>
+    <div className="my-4">{data}</div>
   )
 }
 

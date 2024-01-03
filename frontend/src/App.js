@@ -10,11 +10,7 @@ import Problems from "./components/problems";
 
 const router = createBrowserRouter([
   {
-    path:"/",
-    element: <Navbar></Navbar>
-  },
-  {
-    path: "/homepage",
+    path: "/",
     element: <Homepage></Homepage>
   },
   {
@@ -30,7 +26,7 @@ const router = createBrowserRouter([
     element: <Contest></Contest>
   },
   {
-    path: "/Problem",
+    path: "/problem",
     element: <Problems></Problems>
   },
   {

@@ -5,7 +5,7 @@ function Navbar() {
     <div className="mx-36">
       <ul className="flex justify-between">
         <div className="flex gap-4">
-          <li><Link to={`/homepage`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
+          <li><Link to={`/`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
           <li><Link to={`/explore`}>Explore</Link></li>
           <li><Link to={`/problem`}>Problem</Link></li>
           <li><Link to={`/contest`}>Contest</Link></li>

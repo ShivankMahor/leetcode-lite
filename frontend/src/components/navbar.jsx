@@ -1,14 +1,15 @@
+import { Outlet, Link } from "react-router-dom";
 function Navbar() {
 
   return (
-    <div>
+    <div className="mx-36">
       <ul className="flex justify-between">
         <div className="flex gap-4">
-          <li><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></li>
-          <li>Explore</li>
-          <li>Problem</li>
-          <li>Contest</li>
-          <li>Discuss</li>
+          <li><Link to={`/homepage`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
+          <li><Link to={`/explore`}>Explore</Link></li>
+          <li><Link to={`/`}>Problem</Link></li>
+          <li><Link to={`/contest`}>Contest</Link></li>
+          <li><Link to={`/discuss`}>Discuss</Link></li>
           <li>Interview</li>
           <li>Store</li>
         </div>

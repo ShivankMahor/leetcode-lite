@@ -6,7 +6,7 @@ function Card({ data }){
             <div className="relative w-64 h-64 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out">
                 <img
                     src={imageUrl}
-                    alt="Card Image"
+                    alt="Loading"
                     className="w-full h-2/3 object-cover"
                 />
 
@@ -16,11 +16,11 @@ function Card({ data }){
                 </div>
                 <div className="absolute bottom-0 right-0 left-0 px-4 pb-5 pt-8 flex justify-between items-end">
                     <div className="flex flex-col items-center justify-center">
-                        <p className="text-2xl font-bold text-navy-700 dark:text-white">{chapters}</p>
+                        <p className="text-2xl font-bold text-navy-700 ">{chapters}</p>
                         <p className="text-sm font-normal text-gray-600">Chapters</p>
                     </div>
                     <div className="flex flex-col items-center justify-center">
-                        <p className="text-2xl font-bold text-navy-700 dark:text-white">
+                        <p className="text-2xl font-bold text-navy-700">
                             {items}
                         </p>
                         <p className="text-sm font-normal text-gray-600">Items</p>

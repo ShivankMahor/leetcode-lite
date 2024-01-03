@@ -2,10 +2,12 @@ import Navbar from "./navbar";
 import DiscussTopCard from "./discusstopcard"
 import DiscussComments from "./discusscoments";
 import DiscussTags from "./discusstags";
+import Footer from "./footer";
 function Discuss() {
   return (
-    <div className="border-4 grid gap-2">
+    <>
       <Navbar></Navbar>
+    <div className="grid gap-2 mx-36">
       <div className="grid grid-cols-7 gap-4 ">
         <DiscussTopCard data={"Interview Question"}></DiscussTopCard>
         <DiscussTopCard data={"Interview Experience"}></DiscussTopCard>
@@ -60,7 +62,9 @@ function Discuss() {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
+    </>
   )
 }
 

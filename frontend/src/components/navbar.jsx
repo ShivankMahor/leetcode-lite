@@ -7,7 +7,7 @@ function Navbar() {
         <div className="flex gap-4">
           <li><Link to={`/homepage`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
           <li><Link to={`/explore`}>Explore</Link></li>
-          <li><Link to={`/`}>Problem</Link></li>
+          <li><Link to={`/problem`}>Problem</Link></li>
           <li><Link to={`/contest`}>Contest</Link></li>
           <li><Link to={`/discuss`}>Discuss</Link></li>
           <li>Interview</li>

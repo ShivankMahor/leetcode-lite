@@ -44,7 +44,7 @@ function Explore() {
                     >
                         Featured
                     </h1>
-                    <div className="flex overflow-x-scroll pb-0 hide-scroll-bar ml-0">
+                    <div className="flex overflow-x-scroll pb-0 no-scrollbar ml-0">
                         <div className="flex flex-nowrap lg:ml-0 md:ml-0 ml-0">
                             {cardData.map((card) => (
                                 <Card key={card.id} data={card} />
@@ -58,7 +58,7 @@ function Explore() {
                     >
                         Interview
                     </h1>
-                    <div className="flex overflow-x-scroll pb-0 hide-scroll-bar ml-0">
+                    <div className="flex overflow-x-scroll pb-0 no-scrollbar ml-0">
                         <div className="flex flex-nowrap lg:ml-0 md:ml-0 ml-0">
                             {cardData.map((card) => (
                                 <Card key={card.id} data={card} />
@@ -72,7 +72,7 @@ function Explore() {
                     >
                         Learn
                     </h1>
-                    <div className="flex overflow-x-scroll pb-0 hide-scroll-bar ml-0">
+                    <div className="flex overflow-x-scroll pb-0 no-scrollbar ml-0">
                         <div className="flex flex-nowrap lg:ml-0 md:ml-0 ml-0">
                             {cardData.map((card) => (
                                 <Card key={card.id} data={card} />

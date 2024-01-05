@@ -1,10 +1,37 @@
 import P_cards from "./problem_cards1";
 import P_buttons from "./problem_button_pill";
 import P_dropdown from "./problem_dropdown_button";
+import PaginatedTable from "./paginated_table";
+function getRandomTopic(){
+    const topics = ['Algorithm Design', 'Data Structures', 'Dynamic Programming', 'Graph Theory', 'Sorting Algorithms', 'Recursion', 'Greedy Algorithms'];
+    return topics[Math.floor(Math.random() * topics.length)];
+};
+
+function getRandomSolution(){
+    return(
+        Math.random() > 0.5 ? 'Yes' : 'No'
+        )};
+
+function getRandomDifficulty (){
+    const difficulties = ['easy', 'medium', 'hard'];
+    return difficulties[Math.floor(Math.random() * difficulties.length)];
+};
+
+function generateRandomData (count){
+    const data = [];
+    for (let i = 0; i < count; i++) {
+        const topic = getRandomTopic();
+        const solution = getRandomSolution();
+        const difficulty = getRandomDifficulty();
+        data.push({ topic, solution, difficulty });
+    }
+
+    return data;
+};
 
 
 function Problems() {
-
+    const data = generateRandomData(500);
     return (
         <div className="grid grid-cols-4 gap-4 h-screen p-4 bg-gray-200 px-20">
 
@@ -63,10 +90,10 @@ function Problems() {
                 <div className="col-span-3">
                     <div className="mb-3 flex flex-col">
                         <div className="flex w-full flex-wrap gap-2">
-                            <P_dropdown />
-                            <P_dropdown />
-                            <P_dropdown />
-                            <P_dropdown />
+                            <P_dropdown name={'Lists'} />
+                            <P_dropdown name={'Difficulty'}  />
+                            <P_dropdown name={'Status'} />
+                            <P_dropdown name={'Tags'} />
                             <div className="relative flex-1">
                                 <div className="flex items-center bg-gray-100 rounded p-2">
                                     <svg
@@ -124,7 +151,7 @@ function Problems() {
                                             fill="none"
                                             stroke="currentColor"
                                             className="h-18 w-18 text-white"
-                                            
+
                                         >
                                             <path
                                                 strokeLinecap="round"
@@ -139,14 +166,17 @@ function Problems() {
                             </div>
                         </div>
                     </div>
+                    <div className="col-span-3">
+                        <div className="container mx-auto mt-0">
+                        <PaginatedTable data={data} itemsPerPage={25} />
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* Second child div with 1 column */}
             <div className="col-span-1 bg-gray-300 p-8">
                 {/* Content for the second div */}
-                <h2 className="text-lg font-bold mb-2"></h2>
-                <p></p>
             </div>
         </div>
     );

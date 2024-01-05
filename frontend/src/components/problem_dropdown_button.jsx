@@ -1,5 +1,5 @@
 import { useState } from "react";
-function P_dropdown(){
+function P_dropdown({name}){
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleDropdown() {
@@ -11,7 +11,7 @@ function P_dropdown(){
                             onClick={toggleDropdown}
                             className="inline-flex justify-center bg-gray-100 rounded items-center p-2 text-sm font-medium text-gray-700 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
                         >
-                            Dropdown
+                            {name}
                             <svg
                                 className={`ml-2 h-5 w-5 transition-transform ${isOpen ? 'transform rotate-180' : ''
                                     }`}

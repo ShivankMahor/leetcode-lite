@@ -18,7 +18,7 @@ export async function verifyUser(req,res,next){
 
 
 /** POST: http://localhost:8000/api/login 
-  * @param : {
+  * body : {
   "userName" : "example123",
   "password" : "admin123"
   }
@@ -29,7 +29,8 @@ export async function login(req,res){
   let user = await User.findOne({userName});
   if(!user) return res.status(500).send({error:"User Not Found"});
   if(password !== user.password) return res.status(500).send({error:"Passsword does not Match"});
-  return res.status(201).json({msg:"Login Successful",
+  return res.status(201).json({
+    msg:"Login Successful",
     userDetails:user
   })
 }

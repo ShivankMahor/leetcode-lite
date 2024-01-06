@@ -12,8 +12,9 @@ app.use(express.json());
 app.use(cors({
   origin:"http://localhost:3000"
 }))
-mongoose.connect(`mongodb+srv://Shivank:${process.env.PASSWORD}@cluster0.ujaj6hf.mongodb.net/?retryWrites=true&w=majority`);
-console.log('Mongoose Server Connected');
+
+
+mongoose.connect(`mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.ujaj6hf.mongodb.net/?retryWrites=true&w=majority`);
 // Access the default connection
 const db = mongoose.connection;
 
@@ -33,10 +34,7 @@ db.on('disconnected', () => {
 });
 
 
-
-
 app.use('/api',router)
-
 
 app.get('/', (req,res)=>{
   res.status(200).json('Hello home')

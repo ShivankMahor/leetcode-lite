@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 
 function Registerpage(){
@@ -40,6 +40,7 @@ function Registerpage(){
           <input type="text" name="password" id="Password" placeholder="Password"  onChange={(e)=>handleChange('password',e.target.value)} className="border-2 border-gray rounded-md text-black px-3"/>
           <button type="submit" className="bg-white rounded-md font-semibold">Register</button>
         </form>
+        <div className="text-[15px] text-center">Already Signed UP? <Link className="border-2 bg-white rounded-md px-1" to='/'>Login</Link></div>
       </div>
     </div>
   )

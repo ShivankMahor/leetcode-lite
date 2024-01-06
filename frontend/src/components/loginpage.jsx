@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react";
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 function Loginpage(){
   const [user, setUser] = useState({
@@ -37,10 +37,8 @@ function Loginpage(){
           <input type="text" name="password" id="Password" placeholder="Password"  onChange={(e)=>handleChange('password',e.target.value)} className="border-2 border-gray rounded-md text-black px-3 my-2"/>
           <button type="submit" className="bg-white rounded-md font-semibold">Login</button>
         </form>
-        <div>
-          <div>Not a member</div>
-          <button onClick={handleSignup}>Sign Up</button>
-        </div>
+        <div className="text-md text-center">Not a member <Link  className="border-2 bg-white rounded-md px-1" to='/register'>Register Now</Link></div>
+        
       </div>
     </div>
   )

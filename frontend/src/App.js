@@ -3,14 +3,16 @@ import Homepage from "./components/homepage";
 import Explore from "./components/explore";
 import Contest from "./components/contest";
 import {createBrowserRouter,Router,RouterProvider} from "react-router-dom";
-import Navbar from "./components/navbar";
 import Problems from "./components/problems";
-
-
-
+import Loginpage from './components/loginpage';
+import Registerpage from './components/registerpage';
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Loginpage></Loginpage>
+  },
+  {
+    path: "/homepage",
     element: <Homepage></Homepage>
   },
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/problem",
     element: <Problems></Problems>
+  },
+  {
+    path: "/register",
+    element: <Registerpage></Registerpage>
   },
   {
     path: "*",

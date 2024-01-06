@@ -13,9 +13,7 @@ function Loginpage(){
     console.log('parameter ', value);
     setUser({...user, [parameter]:value});
   };
-  function handleSignup(){
-    navigate('/register')
-  }
+
   async function handleSubmit(e){
     e.preventDefault();
     console.log(user)

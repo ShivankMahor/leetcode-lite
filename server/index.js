@@ -12,9 +12,8 @@ app.use(express.json());
 app.use(cors({
   origin:"http://localhost:3000"
 }))
-mongoose.connect(`mongodb+srv://Shivank:${process.env.PASSWORD}@cluster0.ujaj6hf.mongodb.net/?retryWrites=true&w=majority`);
-console.log('Mongoose Server Connected');
-// Access the default connection
+mongoose.connect(`mongodb+srv://${process.env.user_name}:${process.env.PASSWORD}@cluster0.ujaj6hf.mongodb.net/?retryWrites=true&w=majority`);
+ // Access the default connection
 const db = mongoose.connection;
 
 // Listen for the connection event

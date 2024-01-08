@@ -1,5 +1,7 @@
 import User from '../model/user.js'
-
+import RefreshToken from '../model/refreshtoken.js'
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
 export async function verifyUser(req,res,next){
   try{
@@ -13,9 +15,9 @@ export async function verifyUser(req,res,next){
 
   }catch(error){
     console.log("Error in verifyuser ", error);
+    return res.status(500).send({error:error});
   }
 }
-
 
 /** POST: http://localhost:8000/api/login 
   * body : {
@@ -25,16 +27,38 @@ export async function verifyUser(req,res,next){
 */
 export async function login(req,res){
   const {userName, password} = req.body;
-  console.log(req.body);
-  let user = await User.findOne({userName});
-  if(!user) return res.status(500).send({error:"User Not Found"});
-  if(password !== user.password) return res.status(500).send({error:"Passsword does not Match"});
-  return res.status(201).json({
-    msg:"Login Successful",
-    userDetails:user
-  })
-}
+  
+  try {
+    console.log("console in login controller", req.body);
+    let user = await User.findOne({userName});
+    if(!user) return res.status(500).send({error:"User Not Found"});
 
+    const data = {userName:user.userName}
+    if(await bcrypt.compare(password,user.password)){
+      const accessToken = generateJwtToken(data);
+      console.log('login log',user)
+      const refreshToken = jwt.sign(user.userName, process.env.REFRESH_TOKEN_SECRET);
+      const reftoken = new RefreshToken({
+        refreshToken,
+        userName:user.userName,
+      })
+      const savedRefToken = await reftoken.save(reftoken);
+      console.log('Saved refresh Token: ',savedRefToken);
+      
+      return res.status(201).json({
+        msg:"Login Successful",
+        userDetails:user,
+        accessToken: accessToken,
+        refreshToken: savedRefToken.refreshToken
+      })
+    }else{
+      return res.status(500).send({error:"Passsword does not Match"});
+    }
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(401)
+  }
+}
 
 // POST http://localhost:8000/api/register
 // @param :{
@@ -44,24 +68,27 @@ export async function login(req,res){
 // }
 export async function register(req,res){
   try{
-    console.log(req.body);
+    console.log("\nreq.body in register\n",req.body);
+
     const {userName, email, password} =  req.body;
+    const hashedPassword = await bcrypt.hash(password,10)
     const newuser = new User({
       userName,
       email,
-      password,
+      password:hashedPassword,
     })
-
+    // const error = newuser.validateSync();
+    // console.log(`\n ${error} \n`,)
     const savedUser = await newuser.save();
     return res.status(200).json({
-      msg: savedUser 
+      msg: "Registration Successful", 
+      savedUser 
     })
   }catch(err){
-    console.log("Error in Registering User ",err);
-    return res.status(500).json({msg:'Internal Server Error'})
+    console.log("Error in Registering User ",err.message);
+    return res.status(500).json({msg:'Internal Server Error', error:err.message})
   }
 }
-
 
 //http://127.0.0.1:8000/api/user/Shivank
 export async function getuser(req,res){
@@ -78,3 +105,56 @@ export async function getuser(req,res){
   }
 }
 
+export async function logout(req,res){
+  try{
+    console.log("\nReq.body\n ", req.body)
+    const {userName} = req.body;
+    const refreshToken = await RefreshToken.findOne({userName}); 
+    if(refreshToken == null) return res.status(500).send("RefreshToken not exist ");
+    const response = await RefreshToken.deleteOne({userName});
+    console.log("RefreshToken detail in logout ",refreshToken);
+    // console.log("RefreshToken detail in logout ",response);
+    return res.status(200).send({
+      msg:"Logout Successful",
+      response,
+      Time:Date.now()
+    });
+  }catch(error){
+    return res.status(500).send('error in logout');
+  }
+}
+
+export async function tokenRegenerate(req,res){
+  try{
+    const { token } = req.body;
+    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err,user)=>{
+      if(err) return res.sendStatus(401) //' Unauthorized
+
+      const newtoken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30s"});
+      return res.status(200).json({
+        msg:"Token generated Successfully",
+        newaccessToken: newtoken
+      })
+    }) 
+  }catch(error){
+    return res.sendStatus(500);
+  }
+}
+
+function generateJwtToken(data){
+  return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn:"30s"});
+}
+export function auth(req,res,next){
+  const authHeaders = req.headers['authorization'];
+  const token = authHeaders && authHeaders.split(' ')[1];
+
+  if(token == null) return res.sendStatus(401); //' Unauthorized
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=>{
+    if(err) return res.sendStatus(403); //' Forbidden
+    console.log("Inside AUTH ", user)
+    req.user = user;
+    next();
+  })
+
+}

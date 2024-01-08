@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
 
@@ -18,9 +18,13 @@ function Loginpage(){
     e.preventDefault();
     console.log(user)
     try {
-      await axios.post("http://localhost:8000/api/login",user)
+      const response = await axios.post("http://localhost:8000/api/login",user)
+      const { accessToken } = response.data;
+      console.log("response data in login page", response.data.userDetails.userName);
+
+      localStorage.setItem('accessToken', accessToken);
       alert("Login Successful")
-      navigate('/homepage')
+      navigate(`/homepage/${response.data.userDetails.userName}`)
     } catch (error) {
       console.log("Axios error ",error)
     }

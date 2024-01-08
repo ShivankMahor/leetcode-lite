@@ -4,6 +4,7 @@ const router = Router();
 
 router.route('/login').post(controller.verifyUser,controller.login)
 router.route('/register').post(controller.register)
-router.route('/user/:userName').get(controller.getuser)
+router.route('/logout').delete(controller.logout)
+router.route('/user/:userName').get(controller.auth,controller.getuser)
 
 export default router;

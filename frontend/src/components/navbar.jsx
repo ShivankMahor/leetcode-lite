@@ -1,11 +1,11 @@
-import { Outlet, Link } from "react-router-dom";
-function Navbar() {
+import { Outlet, Link, Navigate } from "react-router-dom";
+function Navbar({userName="Shivank"}) {
 
   return (
     <div className="mx-36">
       <ul className="flex justify-between">
         <div className="flex gap-4">
-          <li><Link to={`/`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
+          <li><Link to={`/homepage/${userName}`}><img src="https://assets.leetcode.com/users/leetcode/avatar_1568224780.png" alt="Error" className="h-8" /></Link></li>
           <li><Link to={`/explore`}>Explore</Link></li>
           <li><Link to={`/problem`}>Problem</Link></li>
           <li><Link to={`/contest`}>Contest</Link></li>

@@ -35,28 +35,27 @@ export async function login(req,res){
 
     const data = {userName:user.userName}
     if(await bcrypt.compare(password,user.password)){
-      const accessToken = generateJwtToken(data);
       console.log('login log',user)
       const refreshToken = jwt.sign(user.userName, process.env.REFRESH_TOKEN_SECRET);
       const reftoken = new RefreshToken({
         refreshToken,
         userName:user.userName,
       })
+      const accessToken = generateJwtToken(data);
       const savedRefToken = await reftoken.save(reftoken);
-      console.log('Saved refresh Token: ',savedRefToken);
-      
-      return res.status(201).json({
-        msg:"Login Successful",
-        userDetails:user,
-        accessToken: accessToken,
-        refreshToken: savedRefToken.refreshToken
-      })
+        return res.status(201).json({
+          msg:"Login Successful",
+          userDetails:user,
+          accessToken: accessToken,
+          refreshToken: savedRefToken.refreshToken
+        })
+      // console.log('Saved refresh Token: ',savedRefToken);
     }else{
       return res.status(500).send({error:"Passsword does not Match"});
     }
   } catch (error) {
     console.log(error);
-    res.sendStatus(401)
+    res.sendStatus(403)
   }
 }
 
@@ -142,7 +141,7 @@ export async function tokenRegenerate(req,res){
 }
 
 function generateJwtToken(data){
-  return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn:"30s"});
+  return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn:"10h"});
 }
 export function auth(req,res,next){
   const authHeaders = req.headers['authorization'];

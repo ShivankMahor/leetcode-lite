@@ -6,6 +6,7 @@ import {Route, Routes} from "react-router-dom";
 import Problems from "./components/problems";
 import Loginpage from './components/loginpage';
 import Registerpage from './components/registerpage';
+import ProtectedRoute from "./middleware/auth";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path="/homepage/:userName" element={<Homepage/>}/>
       <Route path="/discuss" element={<Discuss/>}/>
       <Route path="/contest" element={<Contest/>}/> 
-      <Route path="/problem" element={<Problems/>}/>
+      <Route path="/problem" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
       <Route path="/register" element={<Registerpage/>}/>
       <Route path="*" element={<h1>Page Not Found</h1>}/>
     </Routes>

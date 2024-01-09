@@ -1,6 +1,6 @@
-import { useState } from "react";
-import axios from 'axios'
+import { useEffect, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
+import { userLogin,userLogout } from "../helper/helper";
 
 function Loginpage(){
   const [user, setUser] = useState({
@@ -14,21 +14,37 @@ function Loginpage(){
     setUser({...user, [parameter]:value});
   };
 
+  useEffect(()=>{
+    const check = async()=>{
+      const userName = localStorage.getItem('userName');
+      const token = localStorage.getItem('accessToken');
+      localStorage.removeItem('aoifhaoiug');
+      if(userName && token){
+        const response = await userLogout(userName);
+        let { success } = response;
+        if(!success){
+          console.log("Axios error ",response.error? response.error : 'X');
+        }else{
+          console.log("User ",user);
+        }
+      }
+    }
+    check();
+  },[])
+
   async function handleSubmit(e){
     e.preventDefault();
-    console.log(user)
-    try {
-      const response = await axios.post("http://localhost:8000/api/login",user)
-      const { accessToken } = response.data;
-      console.log("response data in login page", response.data.userDetails.userName);
-
-      localStorage.setItem('accessToken', accessToken);
+    const response = await userLogin(user);  
+    let {success} = response; 
+    console.log("Success", success)
+    if(!success){
+      console.log("Axios error ",response.error? response.error : 'X');
+      alert(`Logout the user First using postman with userName as "Shivank" in body`);
+    }else{
       alert("Login Successful")
-      navigate(`/homepage/${response.data.userDetails.userName}`)
-    } catch (error) {
-      console.log("Axios error ",error)
+      navigate(`/homepage/${response.userName}`)
+      console.log(user)
     }
-    console.log("SUBMIT");
   }
   return(
     <div className="bg-slate-400 flex justify-center">
@@ -40,7 +56,6 @@ function Loginpage(){
           <button type="submit" className="bg-white rounded-md font-semibold">Login</button>
         </form>
         <div className="text-md text-center">Not a member <Link  className="border-2 bg-white rounded-md px-1" to='/register'>Register Now</Link></div>
-        
       </div>
     </div>
   )

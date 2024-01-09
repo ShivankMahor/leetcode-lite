@@ -4,9 +4,8 @@ import HomePageCard2 from "./homepagecard2";
 import HomePagePosts from "./homepageposts";
 import HomePageTags from "./homepagetags";
 import Navbar from "./navbar";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
+import { userLogout } from "../helper/helper";
 
 
 let tags = ["Algorithms", "Database", "Shell", "Concurrency", "JavaScript", "Pandas", "React", "Vanilla JS", "Frontend"]
@@ -16,7 +15,6 @@ let cardimgaddress = [
   "https://assets.leetcode.com/users/images/7b7c1fab-b877-47fa-bc72-548fbcc9f94a_1703037199.2794356.jpg"
 
 ]
-
 
 function Homepage() {
 
@@ -28,18 +26,12 @@ function Homepage() {
 
   async function handleLogout(e) {
     e.preventDefault();
-    try {
-      console.log("logout funciton",{userName:details.userName})
-      await axios.delete('http://localhost:8000/api/logout',{
-        data: {
-          userName: details.userName,
-        },
-      });
-      localStorage.removeItem("accessToken");
+    const response = await userLogout(details.userName);
+    let { success } = response;
+    if(!success){
+      console.log("Error in handleLogout", response.error);
+    }else{
       alert("Logout Successful")
-      navigate('/') 
-    }catch(error){
-      console.log(error);
     }
   }
   

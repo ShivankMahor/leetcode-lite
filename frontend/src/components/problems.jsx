@@ -2,6 +2,7 @@ import P_cards from "./problem_cards1";
 import P_buttons from "./problem_button_pill";
 import P_dropdown from "./problem_dropdown_button";
 import PaginatedTable from "./paginated_table";
+import Navbar from "./navbar";
 function getRandomTopic(){
     const topics = ['Algorithm Design', 'Data Structures', 'Dynamic Programming', 'Graph Theory', 'Sorting Algorithms', 'Recursion', 'Greedy Algorithms'];
     return topics[Math.floor(Math.random() * topics.length)];
@@ -32,7 +33,8 @@ function generateRandomData (count){
 
 function Problems() {
     const data = generateRandomData(500);
-    return (
+    return (<>
+        <Navbar/>
         <div className="grid grid-cols-4 gap-4 h-screen p-4 bg-gray-200 px-20">
 
             {/* First child div with 3 columns */}
@@ -179,7 +181,9 @@ function Problems() {
                 {/* Content for the second div */}
             </div>
         </div>
+        </> 
     );
+    
 }
 
 export default Problems

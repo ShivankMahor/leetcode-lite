@@ -14,6 +14,6 @@ const refreshTokenSchema = new mongoose.Schema({
   }
 })
 
-const RefreshToken = mongoose.model('RefreshToken', refreshTokenSchema);
+const RefreshToken = mongoose.model('RefreshToken', refreshTokenSchema,'Refresh_Tokens');
 
 export default RefreshToken;

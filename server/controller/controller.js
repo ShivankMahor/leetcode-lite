@@ -1,4 +1,5 @@
 import User from '../model/user.js'
+import Comment from '../model/comments.js'
 import RefreshToken from '../model/refreshtoken.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
@@ -129,7 +130,7 @@ export async function tokenRegenerate(req,res){
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err,user)=>{
       if(err) return res.sendStatus(401) //' Unauthorized
 
-      const newtoken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30s"});
+      const newtoken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h"});
       return res.status(200).json({
         msg:"Token generated Successfully",
         newaccessToken: newtoken
@@ -140,20 +141,52 @@ export async function tokenRegenerate(req,res){
   }
 }
 
+// data{
+//   topicTitle,tags[],description,createdBy
+// }
+export async function postComment(req,res){
+  try{
+    const data = req.body.data;
+    console.log(`\n${data}\n`)
+    const newComment = new Comment({
+      topicTitle: data.topicTitle,
+      tags: data.tags,
+      description: data.description,
+      createdBy: data.createdBy,
+    })
+
+    const savedComment = await newComment.save();
+    return res.status(200).send({
+      message: "Comment Uploaded",
+      Comment:savedComment,
+    })
+
+  }catch(error){
+    console.loh(error);
+    return res.status(400).send({
+      message:"Error in saving Comment",
+      error: error
+    })
+  }
+}
+
+export async function getComments(req,res){
+  try{
+    const response = await Comment.find().sort({ votes: -1, views: -1 }).limit(10);
+    console.log(response);
+    return res.status(200).send({
+      success: true,
+      comments: response
+    })
+  }catch(error){
+    console.log(error);
+    
+    // return res.status(400).send(str)
+    return res.status(400).send("Error in comment.find()", str)
+  }
+}
+
 function generateJwtToken(data){
   return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {expiresIn:"10h"});
 }
-export function auth(req,res,next){
-  const authHeaders = req.headers['authorization'];
-  const token = authHeaders && authHeaders.split(' ')[1];
 
-  if(token == null) return res.sendStatus(401); //' Unauthorized
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=>{
-    if(err) return res.sendStatus(403); //' Forbidden
-    console.log("Inside AUTH ", user)
-    req.user = user;
-    next();
-  })
-
-}

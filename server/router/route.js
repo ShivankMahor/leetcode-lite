@@ -1,11 +1,19 @@
 import {Router} from 'express'
 import * as controller from '../controller/controller.js'
-import { verifyToken } from '../middleware/middleware.js';
+import * as middleware from '../middleware/middleware.js';
 const router = Router();
 
+//. Get Routes
+router.route('/user/:userName').get(middleware.auth,controller.getuser)
+router.route('/getcomments').get(controller.getComments)
+
+
+//. Post Routes
 router.route('/login').post(controller.verifyUser,controller.login)
 router.route('/register').post(controller.register)
+router.route('/verify').post(middleware.verifyToken)
+router.route('/postcomment').post(middleware.auth,controller.postComment)
+
+//. Delete Routes
 router.route('/logout').delete(controller.logout)
-router.route('/user/:userName').get(controller.auth,controller.getuser)
-router.route('/verify').post(verifyToken)
 export default router;

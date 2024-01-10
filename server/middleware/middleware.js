@@ -7,7 +7,7 @@ export async function verifyToken(req,res,next){
     if(!token) return res.status(400).send({success: false, message:"Token not provided"})
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error,user) =>{
-      if(error) return res.status(200).send({success: false, message:"Wrong token"});
+      if(error) return res.status(400).send({success: false, message:"Token verification failed", error});
       res.status(200).send({success: true, message:"Token Verified", data:{user}})
       next();
     })
@@ -22,9 +22,9 @@ export function auth(req,res,next){
   const token = authHeaders && authHeaders.split(' ')[1];
 
   if(token == null) return res.sendStatus(401); //' Unauthorized
-
+  console.log("Token :",token)
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=>{
-    if(err) return res.sendStatus(403); //' Forbidden
+    if(err) return res.status(403).send(err); //' Forbidden
     console.log("Inside AUTH ", user)
     req.user = user;
     next();

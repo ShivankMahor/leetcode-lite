@@ -6,7 +6,7 @@ const router = Router();
 //. Get Routes
 router.route('/user/:userName').get(middleware.auth,controller.getuser)
 router.route('/getcomments').get(controller.getComments)
-
+router.route('/gettags').get(controller.getTags)
 
 //. Post Routes
 router.route('/login').post(controller.verifyUser,controller.login)

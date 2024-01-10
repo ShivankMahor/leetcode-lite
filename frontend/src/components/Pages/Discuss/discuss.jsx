@@ -1,8 +1,9 @@
 import Navbar from "../../navbar";
 import DiscussTopCard from "./discusstopcard"
-import DiscussTags from "./discusstags";
 import Footer from "../../footer";
 import CommentSection from "./commentsSection";
+import TagsSection from "./tagsSection";
+
 
 
 
@@ -52,10 +53,7 @@ function Discuss() {
           <div>
             <input type="text" name="" id="" placeholder="Search for tags" className="text-[14px]  border-[1px] border-gray-500/30 rounded-sm px-2 py-1 w-full my-3"/>           
             <div className="flex flex-wrap gap-2 text-[12px]">
-              <DiscussTags name={"Google India"} number={1200}></DiscussTags>
-              <DiscussTags name={"Amazon"} number={1710}></DiscussTags>
-              <DiscussTags name={"Flipkart"} number={520}></DiscussTags>
-              <DiscussTags name={"Online Assesment"} number={1200}></DiscussTags>
+              <TagsSection></TagsSection>
             </div>
           </div>
         </div>

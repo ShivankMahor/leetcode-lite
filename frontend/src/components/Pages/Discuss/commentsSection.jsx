@@ -6,12 +6,16 @@ function CommentSection(){
 
   useEffect(()=>{
     const reqComment = async ()=>{
-      const response = await getComments();
-      console.log(response)
-      let { success } = response
-      if(!success) throw new Error ('Error in getting Comments');
-      else{
-        setAllComments(response.comments);
+      try {
+        const response = await getComments();
+        console.log("comments",response)
+        let { success } = response
+        if(!success) throw new Error ('Error in getting Comments');
+        else{
+          setAllComments(response.comments);
+        }
+      } catch (error) {
+        console.log("Error in Fetching Comments", error);
       }
     }
     reqComment();

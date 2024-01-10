@@ -44,6 +44,26 @@ export async function getComments(){
       comments: response.data.comments,
     };
   }catch(error){
-    return error;
+    return {
+      success: false,
+      error: error
+    }
+  }
+}
+
+export async function getTags(){
+  try{
+    const response = await axios.get('http://localhost:8000/api/gettags');
+    console.log(response)
+    return {
+      success: true,
+      tags: response.data.tags,
+    }
+  }catch(error){
+    console.log(error);
+    return {
+      success: false,
+      error:error,
+    }
   }
 }

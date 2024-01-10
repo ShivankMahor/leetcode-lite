@@ -5,7 +5,6 @@ import { FaEye } from "react-icons/fa";
 
 
 function Comment({props}) {
-  console.log("props ",props)
   return (
     <div>
       <div className="flex align-middle justify-between border-b-[1px] mr-4 border-gray-600/30">
@@ -14,8 +13,8 @@ function Comment({props}) {
           <div className="m-2 ml-0">
             <div className="font-bold flex gap-2">
               <div>{props.topicTitle}</div>
-              {props.tags.map((tag,index)=>(
-                <DiscussTags key={index}name={tag}></DiscussTags>
+              {props.tags.map((element,index)=>(
+                <DiscussTags key={index} name={element}></DiscussTags>
               ))}
             </div>
             <div className="text-[12px] text-gray-500">

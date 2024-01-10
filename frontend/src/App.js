@@ -1,9 +1,9 @@
-import Discuss from "./components/discuss";
-import Homepage from "./components/homepage";
+import Discuss from "./components/Pages/Discuss/discuss";
+import Homepage from "./components/Pages/Homepage/homepage";
 import Explore from "./components/explore";
-import Contest from "./components/contest";
+import Contest from "./components/Pages/Contest/contest";
 import {Route, Routes} from "react-router-dom";
-import Problems from "./components/problems";
+import Problems from "./components/Pages/Problems/problems";
 import Loginpage from './components/loginpage';
 import Registerpage from './components/registerpage';
 import ProtectedRoute from "./middleware/auth";

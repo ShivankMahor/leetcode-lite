@@ -1,11 +1,11 @@
-import Footer from "./footer";
+import Footer from "../../footer";
 import HomePageCard from "./homepagecard";
 import HomePageCard2 from "./homepagecard2";
 import HomePagePosts from "./homepageposts";
 import HomePageTags from "./homepagetags";
-import Navbar from "./navbar";
+import Navbar from "../../navbar";
 import { useParams,useNavigate } from "react-router-dom";
-import { userLogout } from "../helper/helper";
+import { userLogout } from "../../../helper/helper";
 
 
 let tags = ["Algorithms", "Database", "Shell", "Concurrency", "JavaScript", "Pandas", "React", "Vanilla JS", "Frontend"]
@@ -32,6 +32,7 @@ function Homepage() {
       console.log("Error in handleLogout", response.error);
     }else{
       alert("Logout Successful")
+      navigate('/')
     }
   }
   

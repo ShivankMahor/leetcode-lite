@@ -1,8 +1,11 @@
-import Navbar from "./navbar";
+import Navbar from "../../navbar";
 import DiscussTopCard from "./discusstopcard"
-import DiscussComments from "./discusscoments";
 import DiscussTags from "./discusstags";
-import Footer from "./footer";
+import Footer from "../../footer";
+import CommentSection from "./commentsSection";
+
+
+
 function Discuss() {
   return (
     <>
@@ -41,12 +44,7 @@ function Discuss() {
             </div>
           </div>
           <div>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
-            <DiscussComments votes={120} views={1200}></DiscussComments>
+            <CommentSection></CommentSection>
           </div>
         </div>
         <div className="p-4 bg-white rounded-sm ">

@@ -4,8 +4,8 @@ import { userLogin,userLogout } from "../helper/helper";
 
 function Loginpage(){
   const [user, setUser] = useState({
-    userName: '',
-    password:'',
+    userName: 'Shivank',
+    password:'12345',
   });
   
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Loginpage(){
     const check = async()=>{
       const userName = localStorage.getItem('userName');
       const token = localStorage.getItem('accessToken');
-      localStorage.removeItem('aoifhaoiug');
+      console.log("check in logout")
       if(userName && token){
         const response = await userLogout(userName);
         let { success } = response;
@@ -37,9 +37,11 @@ function Loginpage(){
     const response = await userLogin(user);  
     let {success} = response; 
     console.log("Success", success)
+    console.log("response", response)
+
     if(!success){
       console.log("Axios error ",response.error? response.error : 'X');
-      alert(`Logout the user First using postman with userName as "Shivank" in body`);
+      alert(response.error.response.data.error? response.error.response.data.error : response.error.response.data.statusText )
     }else{
       alert("Login Successful")
       navigate(`/homepage/${response.userName}`)

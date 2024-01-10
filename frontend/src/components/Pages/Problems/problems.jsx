@@ -2,7 +2,7 @@ import P_cards from "./problem_cards1";
 import P_buttons from "./problem_button_pill";
 import P_dropdown from "./problem_dropdown_button";
 import PaginatedTable from "./paginated_table";
-import Navbar from "./navbar";
+import Navbar from "../../navbar";
 function getRandomTopic(){
     const topics = ['Algorithm Design', 'Data Structures', 'Dynamic Programming', 'Graph Theory', 'Sorting Algorithms', 'Recursion', 'Greedy Algorithms'];
     return topics[Math.floor(Math.random() * topics.length)];

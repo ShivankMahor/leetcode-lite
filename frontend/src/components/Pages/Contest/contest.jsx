@@ -2,10 +2,10 @@ import ContestBigCard from "./contest_big_card";
 import ContestMediumCard from "./contest_medium_card";
 import ContestRanking from "./contest_ranking";
 import ContestSmallCard from "./contest_small_card";
-import Footer from "./footer";
-import Navbar from "./navbar";
+import Footer from "../../footer";
+import Navbar from "../../navbar";
 import { LuTrophy } from "react-icons/lu";
-import trophy from '../assets/TrophyCup.png'
+import trophy from '../../../assets/TrophyCup.png'
 
 function Contest() {
   return (

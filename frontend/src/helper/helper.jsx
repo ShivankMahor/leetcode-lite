@@ -1,5 +1,8 @@
 import axios from "axios";
+
+//! This commented line not 
 // axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+
 export async function userLogin(userDetails){
   console.log(userDetails);
   console.log(process.env.REACT_APP_SERVER_DOMAIN);
@@ -35,9 +38,10 @@ export async function userLogout(userName){
   }
 }
 
-export async function getComments(){
+export async function getComments(query){
   try{
-    const response = await axios.get('http://localhost:8000/api/getcomments')
+    console.log("query:", query)
+    const response = await axios.get(`http://localhost:8000/api/getcomments/${query}`)
     console.log("this is response",response.data.comments)
     return {
       success: true,

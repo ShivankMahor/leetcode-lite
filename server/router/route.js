@@ -5,6 +5,7 @@ const router = Router();
 
 //. Get Routes
 router.route('/user/:userName').get(middleware.auth,controller.getuser)
+router.route('/getcomments/:query').get(controller.getComments)
 router.route('/getcomments').get(controller.getComments)
 router.route('/gettags').get(controller.getTags)
 

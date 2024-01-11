@@ -195,7 +195,7 @@ export async function postComment(req, res) {
 //     console.log("Query:", { tag: { $in: tagNames } });
 //     // console.log("Update:", { $inc: { timesUsed: 1 } });
 //     console.log("Options:", { multi: true, upsert: true });
-//     const updatedTags = await Tags.updateMany(
+//     const updatedTags = await Tags.up dateMany(
 //       { tag: { $in: tagNames } },
 //       { $inc: { timesUsed: 1 } },
 //       { upsert: true, multi: true }
@@ -211,8 +211,13 @@ export async function postComment(req, res) {
 
 export async function getComments(req, res) {
   try {
-    const response = await Comment.find().sort({ votes: -1, views: -1 }).limit(10);
-    console.log(response);
+    console.log("\n\n inside ")
+    const {query} = req.params
+    const regex = new RegExp(query,"i");
+
+    console.log("this is qurty \n",query)
+    const response = await Comment.find(query==""? null : { topicTitle: { $regex: regex } }).sort({ votes: -1, views: -1 }).limit(10);
+    console.log("Resopnse: ",response);
     return res.status(200).send({
       success: true,
       comments: response
@@ -226,19 +231,19 @@ export async function getComments(req, res) {
   }
 }
 
-export async function getTags(req,res){
-  try{
-    const response = await Tags.find().sort({timesUsed:-1}).limit(10000);
+export async function getTags(req, res) {
+  try {
+    const response = await Tags.find().sort({ timesUsed: -1 });
     console.log(response);
     return res.status(200).send({
-      tags:response
+      tags: response
     })
-  }catch(error){
+  } catch (error) {
     console.log(error);
     return res.status(500).send({
       success: false,
       message: "Error in getTags",
-      error:error.message
+      error: error.message
     })
   }
 }

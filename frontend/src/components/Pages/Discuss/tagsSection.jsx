@@ -3,9 +3,11 @@ import { getTags } from "../../../helper/helper";
 import DiscussTags from "./discusstags";
 
 function TagsSection() {
+  
+  console.log("TagsSection Rerender")
+
   const [tags, setTags] = useState([]);
   const [query, setQuery] = useState("");
-
   const filteredTags = useMemo(() => {  
     return tags.filter(item => {
       return item.tag.toLowerCase().includes(query.toLowerCase())

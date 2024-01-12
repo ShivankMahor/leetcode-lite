@@ -17,8 +17,6 @@ let cardimgaddress = [
 ]
 
 function Homepage() {
-
-
   const navigate = useNavigate();
   const details = useParams();
   console.log({Detials: details.userName})
@@ -38,8 +36,8 @@ function Homepage() {
   
   return (
     <>
-      <Navbar />
-      <div className="mx-36">
+    <Navbar></Navbar>
+      <div className="mx-36 pt-11">
         <div className="px-20 bg-yellow-200/30 rounded-md border-[1px] border-orange-300 text-[14px] p-4">In an effort to fight COVID-19, from now until a limited time only, users residing in India can enjoy discount on both monthly and annual subscriptions!</div>
         <div className="mx-20 flex" >
           <div className="w-2/3 m-4 border-r-[1px] border-gray-600/50">
@@ -56,7 +54,6 @@ function Homepage() {
             <HomePagePosts></HomePagePosts>
           </div>
 
-          {/* sidebar */}
           <div className="m-4 text-[13px]">
             <div className="flex flex-col gap-5">
               <HomePageCard link={cardimgaddress[0]}></HomePageCard>
@@ -66,7 +63,7 @@ function Homepage() {
             <div className="flex border-gray-500 border-b-[1px] border-gray-600/50 m-4"><HomePageCard2></HomePageCard2></div>
             <div className="flex flex-row-reverse border-gray-500 border-b-[1px] m-4 gap-4"><HomePageCard2></HomePageCard2></div>
             <div className="flex border-gray-500 border-b-[1px] border-gray-600/50 m-4"><HomePageCard2></HomePageCard2></div>
-            <div className="border-gray-500 border-b-[1px] border-gray-600/50 m-4 font-medium text-[14px]">
+            <div className="border-gray-500 border-b-[1px] border-gray-600/50 m-4 font-medium text-[14px] gap-2 grid pb-4">
               <div>OO Design</div>
               <div>Operating System</div>
             </div>

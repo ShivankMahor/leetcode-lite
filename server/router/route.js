@@ -13,7 +13,8 @@ router.route('/gettags').get(controller.getTags)
 router.route('/login').post(controller.verifyUser,controller.login)
 router.route('/register').post(controller.register)
 router.route('/verify').post(middleware.verifyToken)
-router.route('/postcomment').post(middleware.auth,controller.postComment)
+router.route('/postcomment').post(controller.postComment)
+// router.route('/postcomment').post(middleware.auth,controller.postComment)
 
 //. Delete Routes
 router.route('/logout').delete(controller.logout)

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { userLogin,userLogout } from "../helper/helper";
+import CurrentTime from "../utility/time";
 
 function Loginpage(){
   const [user, setUser] = useState({
@@ -25,7 +26,7 @@ function Loginpage(){
         if(!success){
           console.log("Axios error ",response.error? response.error : 'X');
         }else{
-          console.log("User ",user);
+          // console.log("User ",user);
         }
       }
     }

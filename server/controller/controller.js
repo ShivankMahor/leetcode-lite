@@ -152,15 +152,15 @@ export async function tokenRegenerate(req, res) {
 export async function postComment(req, res) {
   try {
     const data = req.body.data;
-    console.log(`\n${data}\n`)
+    console.log(JSON.stringify(data))
     const newComment = new Comment({
       topicTitle: data.topicTitle,
       tags: data.tags,
       description: data.description,
       createdBy: data.createdBy,
     })
-    data.tags.forEach(async (element) => {
 
+    data.tags.forEach(async (element) => {
       try {
         console.log(element)
         const savedTag = await Tags.findOneAndUpdate(
@@ -182,7 +182,7 @@ export async function postComment(req, res) {
     })
 
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     return res.status(400).send({
       message: "Error in saving Comment",
       error: error.message
@@ -211,13 +211,13 @@ export async function postComment(req, res) {
 
 export async function getComments(req, res) {
   try {
-    console.log("\n\n inside ")
+    // console.log("\n\n inside ")
     const {query} = req.params
     const regex = new RegExp(query,"i");
-
-    console.log("this is qurty \n",query)
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    // console.log("this is qurty \n",query)
     const response = await Comment.find(query==""? null : { topicTitle: { $regex: regex } }).sort({ votes: -1, views: -1 }).limit(10);
-    console.log("Resopnse: ",response);
+    // console.log("Resopnse: ",response);
     return res.status(200).send({
       success: true,
       comments: response
@@ -234,7 +234,7 @@ export async function getComments(req, res) {
 export async function getTags(req, res) {
   try {
     const response = await Tags.find().sort({ timesUsed: -1 });
-    console.log(response);
+    // console.log(response);
     return res.status(200).send({
       tags: response
     })

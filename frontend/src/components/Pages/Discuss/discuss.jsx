@@ -3,11 +3,13 @@ import DiscussTopCard from "./discusstopcard"
 import Footer from "../../footer";
 import CommentSection from "./commentsSection";
 import TagsSection from "./tagsSection";
+import PostComment from "./postcomment";
 
 
 
 
 function Discuss() {
+
   return (
     <>
       <Navbar></Navbar>
@@ -35,6 +37,7 @@ function Discuss() {
         </div>
         <Footer></Footer>
       </div>
+      
     </>
   )
 }

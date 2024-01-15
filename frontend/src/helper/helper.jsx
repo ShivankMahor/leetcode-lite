@@ -103,3 +103,13 @@ export async function postComment(title, mtags, description) {
     }
   }
 }
+
+
+export async function getProblems(){
+  try {
+    const response = await axios.get("/api/getproblems");
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}

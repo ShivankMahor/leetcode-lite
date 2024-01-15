@@ -11,7 +11,8 @@ import ProtectedRoute from "./middleware/auth";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Loginpage/>}/>
+      {/* <Route path="/" element={<Loginpage/>}/> */}
+      <Route path="/" element={<Problems/>}/>
       <Route path="/explore" element={<Explore/>}/>
       <Route path="/homepage/:userName" element={<Homepage/>}/>
       <Route path="/discuss" element={<Discuss/>}/>

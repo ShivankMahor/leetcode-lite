@@ -1,0 +1,11 @@
+@layer utility{
+	.a:first-child{
+		color: rgb(24, 186, 43);;
+	}
+	.b:nth-child(2){
+		color: rgb(230, 230, 51);
+	}
+	.c:nth-child(3){
+		color: rgb(209, 67, 67);
+	}
+}

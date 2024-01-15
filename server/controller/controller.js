@@ -4,6 +4,7 @@ import RefreshToken from '../model/refreshtoken.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import Tags from '../model/tags.js'
+import ProblemRow from '../model/problemrow.js'
 
 export async function verifyUser(req, res, next) {
   try {
@@ -214,7 +215,7 @@ export async function getComments(req, res) {
     // console.log("\n\n inside ")
     const {query} = req.params
     const regex = new RegExp(query,"i");
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // await new Promise(resolve => setTimeout(resolve, 1000));
     // console.log("this is qurty \n",query)
     const response = await Comment.find(query==""? null : { topicTitle: { $regex: regex } }).sort({ votes: -1, views: -1 }).limit(10);
     // console.log("Resopnse: ",response);
@@ -252,3 +253,41 @@ function generateJwtToken(data) {
   return jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10h" });
 }
 
+export async function addNewQuestion(req,res){
+  try {
+    const data = req.body.data? req.body.data : null
+    const schema = new ProblemRow({
+      acRate:data.acRate,
+      questionName : data.questionName,
+      difficulty: data.difficulty,
+      frontendQuestionNo: data.frontendQuestionNo,
+      solvedBy: data.solvedBy,
+      topicTags: data.topicTags 
+    })
+
+    const response = await schema.save();
+    console.log(response);
+    return res.status(200).send({
+      msg: "Question Saved Successfully",
+      question: response
+    })
+
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).send(error.message)
+  } 
+}
+
+export async function getProblems(req,res){
+  try {
+    const response = await ProblemRow.find().sort({frontendQuestionNo: 1});
+    console.log(response)
+    return res.status(200).send({
+      msg:"Problems Fetched",
+      problems:response,
+    })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).send(error.message)
+  }
+}

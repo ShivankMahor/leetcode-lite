@@ -9,10 +9,15 @@ dotenv.config();
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors({
-  origin:"http://localhost:3000",
-}))
+app.use(cors());
 
+app.use(function (req, res, next) {
+  //Enabling CORS
+  res.header("Access-Control-Allow-Origin", "https://leetcode-lite-xi.vercel.app/");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+    next();
+  });
 
 mongoose.connect(`mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.ujaj6hf.mongodb.net/?retryWrites=true&w=majority`);
 // Access the default connection

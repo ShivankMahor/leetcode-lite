@@ -45,12 +45,18 @@ export async function login(req, res) {
         userName: user.userName,
       })
       const accessToken = generateJwtToken(data);
-      const savedRefToken = await reftoken.save(reftoken);
+      const existingToken = await reftoken.findOne({ userName: user.userName });
+      let savedRefToken
+      // If the refresh token doesn't exist, save it
+      if (!existingToken) {
+          savedRefToken = await reftoken.save(reftoken);
+          // Handle the saved refresh token as needed
+      }
       return res.status(201).json({
         msg: "Login Successful",
         userDetails: user,
         accessToken: accessToken,
-        refreshToken: savedRefToken.refreshToken
+        refreshToken: existingToken? existingToken.RefreshToken : savedRefToken.refreshToken
       })
       // console.log('Saved refresh Token: ',savedRefToken);
     } else {

@@ -33,7 +33,7 @@ function Navbar() {
           <li><LuBell /></li>
           <li><FaGripfire /></li>
           <li><IoPerson /></li>
-          <li>Premium</li>
+          <li>{userName}</li>
         </div>
       </ul>
     </div>

@@ -6,8 +6,8 @@ import "./MordernForm.css";
 
 function ModernForm() {
     const [user, setUser] = useState({
-        userName: 'Shivank',
-        password: '12345',
+        userName: '',
+        password: '',
     });
 
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ function ModernForm() {
                 const response = await userLogout(userName);
                 let { success } = response;
                 if (!success) {
-                    console.log("Axios error ", response.error ? response.error : 'X');
+                    console.log("Axios error ", response ? response.error.message : 'X');
                 } else {
                     // console.log("User ",user);
                 }
@@ -43,7 +43,8 @@ function ModernForm() {
 
         if (!success) {
             console.log("Axios error ", response.error ? response.error : 'X');
-            alert(response.error.response.data ? response.error.response : response.error.response.data.statusText)
+            // console.log("testtt",response.error.message ? response.error.message : response.error.response.data.statusText)
+            alert(response.error.message ? response.error.message : response.error.response.data.statusText)
         } else {
             alert("Login Successful")
             navigate(`/homepage/${response.userName}`)

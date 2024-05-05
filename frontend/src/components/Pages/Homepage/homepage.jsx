@@ -45,6 +45,15 @@ function Homepage() {
             <HomePagePosts></HomePagePosts>
             <HomePagePosts></HomePagePosts>
             <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
+            <HomePagePosts></HomePagePosts>
           </div>
           <div className="m-4 text-[13px]">
             <div className="flex flex-col gap-5">

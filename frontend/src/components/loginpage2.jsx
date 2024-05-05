@@ -43,7 +43,7 @@ function ModernForm() {
 
         if (!success) {
             console.log("Axios error ", response.error ? response.error : 'X');
-            alert(response.error.response.data.error ? response.error.response.data.error : response.error.response.data.statusText)
+            alert(response.error.response.data ? response.error.response : response.error.response.data.statusText)
         } else {
             alert("Login Successful")
             navigate(`/homepage/${response.userName}`)

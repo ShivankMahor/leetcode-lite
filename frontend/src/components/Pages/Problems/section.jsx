@@ -8,19 +8,56 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import TableRow from "./tablerow";
 import { RiExpandUpDownFill } from "react-icons/ri";
 import { getProblems } from "../../../helper/helper";
+import { useReducer } from "react";
+
 function Section() {
 	const [problems, setProblems] = useState([]);
-
-	const getProblem = async ()=>{
-		try {
-			console.log("getProblem1")
-			const data = await getProblems()
+	const getProblem = async (e)=>{
+		try {		
+			const data = await getProblems(e)
 			console.log(data.problems)
 			setProblems(data.problems)
 		} catch (error) {
 			console.log(error)
 		}
 	} 
+	
+	const [state, dispatch] = useReducer(problemsReducer,problems)
+	function problemsReducer(state,action){
+		console.log(action.type)
+		switch(action.type){
+			// case "Easy" : {
+			// 	const obj = {difficulty : 'Easy'}
+			// 	getProblem(obj)
+			// 	break;
+			// }
+			// case "Medium" : {
+			// 	const obj = {difficulty : 'Medium'}
+			// 	getProblem(obj)
+			// 	break;
+			// }
+			case "Difficulty" : {
+				const obj = {difficulty : action.data}
+				getProblem(obj)
+				break;
+			}
+			case "Tags" : {
+				const obj = {tags : action.data}
+				getProblem(obj)
+				break;
+			}
+			case "Status" : {
+				const obj = { solvedBy: { $all: [localStorage.getItem('userName')] } }
+				getProblem(obj)
+				break;
+			}
+			
+		}
+	}
+	useEffect(()=>{
+		console.log("Rerender")
+	},[problems])
+	
 	useEffect(()=>{
 		getProblem();
 		console.log("getProblem")
@@ -33,11 +70,10 @@ function Section() {
 	]
 	const [openOrClosed, setOpenOrClosed] = useState(['close', 'close', 'close', 'close'])
 	function close(index) {
-		console.log("to change staus :", index)
 		const new_array = openOrClosed.map((item, i) => {
 			return index === i ? item === 'open' ? 'close' : 'open' : 'close';
 		})
-		console.log(new_array);
+		// console.log(new_array);
 		setOpenOrClosed(new_array)
 	}
 	return (
@@ -52,9 +88,9 @@ function Section() {
 			</div>
 			{/* <div className="flex flex-wrap gap-2"> */}
 			<div className="md:flex md:flex-wrap grid grid-cols-3 gap-2">
-				<DropDown index={0} data={data[0]} close={close} status={openOrClosed[0]} name={'Lists'}></DropDown>
-				<DropDown index={1} data={data[1]} close={close} status={openOrClosed[1]} name={'Difficulty'}></DropDown>
-				<DropDown index={2} data={data[2]} close={close} status={openOrClosed[2]} name={"Status"}></DropDown>
+				<DropDown index={0} dispatch={dispatch} data={data[0]} close={close} status={openOrClosed[0]} name={'Lists'}></DropDown>
+				<DropDown index={1} dispatch={dispatch} data={data[1]} close={close} status={openOrClosed[1]} name={'Difficulty'}></DropDown>
+				<DropDown index={2} dispatch={dispatch} data={data[2]} close={close} status={openOrClosed[2]} name={"Status"}></DropDown>
 				<div className="col-span-3"><DropDown2 index={3} data={data[3]} close={close} status={openOrClosed[3]} name={"Tags"}></DropDown2> </div>
 				<div className="bg-[#ffffff1a] flex items-center rounded-md col-span-2 min-h-9">
 					<div className="pl-2"><IoSearch /></div>

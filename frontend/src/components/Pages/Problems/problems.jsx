@@ -8,7 +8,7 @@ function Problems() {
 		<>
 			<Navbar></Navbar>
 			<div className="px-8  xl:px-40 2xl:px-[11.5rem]
-			gap-4 grid xl:grid-cols-4 bg-[#1a1a1a] text-[#eff1f6bf]">
+			gap-4 grid xl:grid-cols-3 bg-[#1a1a1a] text-[#eff1f6bf]">
 				<div className="col-span-3">
 					<div className="pt-20 pb-6 grid md:grid-cols-3 justify-center gap-4">
 						<div> <img className="rounded-md" src="https://assets.leetcode.com/users/images/b0a08a5c-c575-48f6-9110-b6ae4e011e98_1655746322.579097.png" alt="Error" /></div>

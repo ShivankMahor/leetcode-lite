@@ -7,17 +7,19 @@ import Problems from "./components/Pages/Problems/problems";
 import Loginpage from './components/loginpage';
 import Registerpage from './components/registerpage';
 import ProtectedRoute from "./middleware/auth";
+import ModernForm from "./components/loginpage2";
 
 function App() {
   return (
     <Routes>
-      {/* <Route path="/" element={<Loginpage/>}/> */}
-      <Route path="/" element={<Problems/>}/>
+      <Route path="/" element={<ModernForm/>}/>
+      {/* <Route path="/" element={<Problems/>}/> */}
       <Route path="/explore" element={<Explore/>}/>
       <Route path="/homepage/:userName" element={<Homepage/>}/>
       <Route path="/discuss" element={<Discuss/>}/>
       <Route path="/contest" element={<Contest/>}/> 
-      <Route path="/problem" element={<ProtectedRoute><Problems/></ProtectedRoute>}/>
+      {/* <Route path="/problem" element={<ProtectedRoute><Problems/></ProtectedRoute>}/> */}
+      <Route path="/problem" element={<Problems/>}/>
       <Route path="/register" element={<Registerpage/>}/>
       <Route path="*" element={<h1>Page Not Found</h1>}/>
     </Routes>

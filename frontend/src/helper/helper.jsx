@@ -105,9 +105,10 @@ export async function postComment(title, mtags, description) {
 }
 
 
-export async function getProblems(){
+export async function getProblems(query){
   try {
-    const response = await axios.get("/api/getproblems");
+    console.log("e",query);
+    const response = await axios.post('/api/getproblems',{query});
     return response.data;
   } catch (error) {
     return error;

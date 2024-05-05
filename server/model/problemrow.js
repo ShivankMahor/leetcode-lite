@@ -25,6 +25,14 @@ const problemRowSchema = new mongoose.Schema({
 	topicTags:{
 		type:[String],
 		require: true,
+	},
+	solved:{
+		type: Boolean,
+		default: false,
+	},
+	link:{
+		type:String,
+		require: true,
 	}
 })
 

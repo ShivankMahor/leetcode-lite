@@ -11,7 +11,7 @@ function Contest() {
   return (
     <>
       <Navbar></Navbar>
-      <div className="px-64 bg-[#1a1a1a] text-white">
+      <div className="px-64 bg-[#1a1a1a] text-white pt-12">
         <div className="p-4 pt-8">
           <div>
             <span className="px-3 py-2 rounded-xl bg-gray-600">Wish you first AC🤞</span>
@@ -45,10 +45,9 @@ function Contest() {
                   <div className="text-xs">What's a Virtual Contest?</div>
                 </div>
                 <div className="grid gap-6">
-                  <ContestSmallCard></ContestSmallCard>
-                  <ContestSmallCard></ContestSmallCard>
-                  <ContestSmallCard></ContestSmallCard>
-                  <ContestSmallCard></ContestSmallCard>
+                  {[...Array(15)].map((_, index) => (
+                    <ContestSmallCard key={index} week={370+index} />
+                  ))}
                 </div>
               </div>
               <div className="bg-gray-500/20 rounded-2xl p-4 w-2/6">
@@ -57,16 +56,9 @@ function Contest() {
                   <div>Global Ranking</div>
                 </div>
                 <div className="grid gap-6">
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
-                  <ContestRanking></ContestRanking>
+                  {[...Array(20)].map((_, index) => (
+                    <ContestRanking key={index} rank={index+1} />
+                  ))}
                 </div>
               </div>
             </div>

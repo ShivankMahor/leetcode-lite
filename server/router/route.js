@@ -8,7 +8,7 @@ router.route('/user/:userName').get(middleware.auth,controller.getuser)
 router.route('/getcomments/:query').get(controller.getComments)
 router.route('/getcomments').get(controller.getComments)
 router.route('/gettags').get(controller.getTags)
-router.route('/getproblems').get(controller.getProblems)
+router.route('/getproblems').post(controller.getProblems)
 
 //. Post Routes
 router.route('/login').post(controller.verifyUser,controller.login)

@@ -2,7 +2,7 @@ import User from '../model/user.js'
 import Comment from '../model/comments.js'
 import RefreshToken from '../model/refreshtoken.js'
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import bcrypt, { compareSync } from 'bcrypt'
 import Tags from '../model/tags.js'
 import ProblemRow from '../model/problemrow.js'
 
@@ -262,7 +262,8 @@ export async function addNewQuestion(req,res){
       difficulty: data.difficulty,
       frontendQuestionNo: data.frontendQuestionNo,
       solvedBy: data.solvedBy,
-      topicTags: data.topicTags 
+      topicTags: data.topicTags ,
+      link:data.link
     })
 
     const response = await schema.save();
@@ -280,8 +281,12 @@ export async function addNewQuestion(req,res){
 
 export async function getProblems(req,res){
   try {
-    const response = await ProblemRow.find().sort({frontendQuestionNo: 1});
-    console.log(response)
+    const {query} = req.body;
+    console.log("query",req.body)
+    // console.log("query type:", typeof query);
+    // console.log("query content:", JSON.stringify(query, null, 2));
+    const response = await ProblemRow.find(query).sort({frontendQuestionNo: 1});
+    // console.log(response)
     return res.status(200).send({
       msg:"Problems Fetched",
       problems:response,

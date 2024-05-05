@@ -17,7 +17,7 @@ let cardimgaddress = [
 ];
 
 function Explore() {
-    const cardData = Array.from({ length: 10 }, (_, index) => ({
+    const cardData = Array.from({ length: 4 }, (_, index) => ({
         id: index + 1,
         imageUrl: cardimgaddress[index],
         chapters: index + 5,
@@ -28,7 +28,7 @@ function Explore() {
     return (
         <>
             <Navbar />
-            <div className="mx-20">
+            <div className="mx-20 pt-12">
                 <div className="top-heading containers px-20">
                     <div className="label text-base text-slate-300">Welcome to</div>
                     <div className=" flex items-center justify-between">
@@ -45,7 +45,7 @@ function Explore() {
                         Featured
                     </h1>
                     <div className="flex overflow-x-scroll pb-0 no-scrollbar ml-0">
-                        <div className="flex flex-nowrap lg:ml-0 md:ml-0 ml-0">
+                        <div className="flex flex-nowrap lg:ml-0 md:ml-0 ml-0 justify-between">
                             {cardData.map((card) => (
                                 <Card key={card.id} data={card} />
                             ))}

@@ -40,20 +40,12 @@ function Homepage() {
       <div className="mx-36 pt-11">
         <div className="px-20 bg-yellow-200/30 rounded-md border-[1px] border-orange-300 text-[14px] p-4">In an effort to fight COVID-19, from now until a limited time only, users residing in India can enjoy discount on both monthly and annual subscriptions!</div>
         <div className="mx-20 flex" >
-          <div className="w-2/3 m-4 border-r-[1px] border-gray-600/50">
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
-            <HomePagePosts></HomePagePosts>
+          <div className="w-2/3 m-4 border-r-[1px] border-gray-600/50 flex flex-col gap-2 pr-8">
             <HomePagePosts></HomePagePosts>
             <HomePagePosts></HomePagePosts>
             <HomePagePosts></HomePagePosts>
             <HomePagePosts></HomePagePosts>
           </div>
-
           <div className="m-4 text-[13px]">
             <div className="flex flex-col gap-5">
               <HomePageCard link={cardimgaddress[0]}></HomePageCard>

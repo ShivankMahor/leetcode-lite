@@ -30,20 +30,24 @@ function Registerpage(){
     }
     console.log("SUBMIT");
   }
-  return(
-    <div className="bg-slate-400 flex justify-center">
-      <div className="text-xl bg-yellow-200 p-4">
-        <div className="text-center font-bold my-4">Register Page</div>
-        <form action="" onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input type="text" name="userName" id="UserName" placeholder="Username" onChange={(e)=>handleChange('userName',e.target.value)} className="border-2 border-gray rounded-md text-black px-3 "/>
-          <input type="text" name="email" id="Email" placeholder="Email"  onChange={(e)=>handleChange('email',e.target.value)} className="border-2 border-gray rounded-md text-black px-3"/>
-          <input type="text" name="password" id="Password" placeholder="Password"  onChange={(e)=>handleChange('password',e.target.value)} className="border-2 border-gray rounded-md text-black px-3"/>
-          <button type="submit" className="bg-white rounded-md font-semibold">Register</button>
-        </form>
-        <div className="text-[15px] text-center">Already Signed UP? <Link className="border-2 bg-white rounded-md px-1" to='/'>Login</Link></div>
-      </div>
+  return (
+    <div className="container mx-auto">
+        <div className="formbox bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <header>
+                <h1 className="text-2xl font-bold mb-6">Register</h1>
+            </header>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Name" className="w-full px-[18px] py-[12px] mb-4  bg-red" id="namefield" value={user.userName} onChange={(e) => handleChange('userName', e.target.value)} />
+                <input type="email" placeholder="Username or Email address" className="input-field mb-4 pl-2 py-3" value={user.email} onChange={(e) => handleChange('email', e.target.value)} />
+                <input type="password" placeholder="Password" className="input-field mb-4 pl-2 py-3" value={user.password} onChange={(e) => handleChange('password', e.target.value)} />
+                <a href="#" className="text-blue-500 block mb-4">Forget Password</a>
+                <button type="submit" className="bg-[#5851e3] w-full py-4 rounded-md">Register</button>
+
+                <p className="text-center m-2">Already a member?<Link  className=" text-[#5851e3] underline  rounded-md px-1" to='/'>Login</Link></p>
+            </form>
+        </div>
     </div>
-  )
+  );
 }
 
 export default Registerpage;

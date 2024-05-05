@@ -13,7 +13,7 @@ function Discuss() {
   return (
     <>
       <Navbar></Navbar>
-      <div className="grid gap-2 px-36 bg-gray-400/15">
+      <div className="grid gap-2 px-36 bg-gray-400/15 pt-12">
         <div className="grid grid-cols-7 gap-4 ">
           <DiscussTopCard data={"Interview Question"}></DiscussTopCard>
           <DiscussTopCard data={"Interview Experience"}></DiscussTopCard>

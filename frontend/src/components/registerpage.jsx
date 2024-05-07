@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from 'axios'
 import { Link,useNavigate } from "react-router-dom";
 
-
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 function Registerpage(){
   const [user, setUser] = useState({
     userName: '',
@@ -21,7 +21,7 @@ function Registerpage(){
     console.log(user)
 
     try {
-      await axios.post("http://localhost:8000/api/register",user)
+      await axios.post("/api/register",user)
       alert("registration Successful");
       navigate('/')
     } catch (error) {

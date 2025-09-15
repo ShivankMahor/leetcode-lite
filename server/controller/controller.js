@@ -49,14 +49,14 @@ export async function login(req, res) {
       // let savedRefToken
       // If the refresh token doesn't exist, save it
       // if (!existingToken) {
-         const savedRefToken = await reftoken.save(reftoken);
+        //  const savedRefToken = await reftoken.save(reftoken);
           // Handle the saved refresh token as needed
       // }
       return res.status(201).json({
         msg: "Login Successful",
         userDetails: user,
         accessToken: accessToken,
-        refreshToken: savedRefToken.refreshToken
+        refreshToken: refreshToken
         // refreshToken: existingToken? existingToken.RefreshToken : savedRefToken.refreshToken
       })
       // console.log('Saved refresh Token: ',savedRefToken);
@@ -241,6 +241,7 @@ export async function getComments(req, res) {
 
 export async function getTags(req, res) {
   try {
+    console.log("Inside getTags")
     const response = await Tags.find().sort({ timesUsed: -1 });
     // console.log(response);
     return res.status(200).send({

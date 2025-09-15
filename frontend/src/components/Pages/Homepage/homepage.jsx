@@ -130,9 +130,9 @@ const posts = [
           </div>
           <div className="m-4 text-[13px]">
             <div className="flex flex-col gap-5">
-              <HomePageCard link={cardimgaddress[0]}></HomePageCard>
-              <HomePageCard link={cardimgaddress[1]}></HomePageCard>
-              <HomePageCard link={cardimgaddress[2]}></HomePageCard>
+              <HomePageCard key={0} link={cardimgaddress[0]}></HomePageCard>
+              <HomePageCard key={1} link={cardimgaddress[1]}></HomePageCard>
+              <HomePageCard key={2} link={cardimgaddress[2]}></HomePageCard>
             </div>
             <div className="flex border-gray-500 border-b-[1px] border-gray-600/50 m-4"><HomePageCard2></HomePageCard2></div>
             <div className="flex flex-row-reverse border-gray-500 border-b-[1px] m-4 gap-4"><HomePageCard2></HomePageCard2></div>
@@ -143,8 +143,8 @@ const posts = [
             </div>
             <div className="m-4 font-medium text-[14px]">
               <div>Pick One</div>
-              {tags.map((tag) => (
-                <HomePageTags data={tag}></HomePageTags>
+              {tags.map((tag,index) => (
+                <HomePageTags key={`tagid${index}`}data={tag}></HomePageTags>
               ))}
             </div>
           </div>

@@ -78,15 +78,13 @@
 // }
 
 // export default ModernForm;
-
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin, userLogout } from "../helper/helper";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import "./MordernForm.css"; 
+import "./MordernForm.css";
 
 function ModernForm() {
   const [user, setUser] = useState({
@@ -118,19 +116,42 @@ function ModernForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const response = await userLogin(user);
-    let { success } = response;
 
-    if (!success) {
-      toast.error(
-        response?.error?.message ||
-          response?.error?.response?.data?.statusText ||
-          "Login failed",
-        { position: "top-right" }
-      );
-    } else {
-      toast.success("Login Successful 🎉", { position: "top-right" });
-      navigate(`/homepage/${response.userName}`);
+    // Show loading toast
+    const toastId = toast.loading("Logging in... ⏳", {
+      position: "top-right",
+    });
+
+    try {
+      const response = await userLogin(user);
+      let { success } = response;
+
+      if (!success) {
+        toast.update(toastId, {
+          render:
+            response?.error?.message ||
+            response?.error?.response?.data?.statusText ||
+            "Login failed",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
+      } else {
+        toast.update(toastId, {
+          render: "Login Successful 🎉",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+        });
+        navigate(`/homepage/${response.userName}`);
+      }
+    } catch (err) {
+      toast.update(toastId, {
+        render: "Unexpected error occurred",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+      });
     }
   }
 
@@ -144,7 +165,6 @@ function ModernForm() {
 
   return (
     <div className="container mx-auto">
-      {/* Toast container must be included once */}
       <ToastContainer />
 
       <div className="formbox bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

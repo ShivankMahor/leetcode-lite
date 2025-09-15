@@ -53,8 +53,8 @@ function ModernForm() {
     }
     function handleDemoCredential(){
         setUser({
-            userName: "admin",
-            password: "123456@123"
+            userName: "ShivankMahor",
+            password: "Shivank@2003"
         })
     }
     return (

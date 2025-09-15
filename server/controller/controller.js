@@ -118,14 +118,14 @@ export async function logout(req, res) {
   try {
     console.log("\nReq.body\n ", req.body)
     const { userName } = req.body;
-    const refreshToken = await RefreshToken.findOne({ userName });
-    if (refreshToken == null) return res.status(500).send("RefreshToken not exist ");
-    const response = await RefreshToken.deleteOne({ userName });
-    console.log("RefreshToken detail in logout ", refreshToken);
+    // const refreshToken = await RefreshToken.findOne({ userName });
+    // if (refreshToken == null) return res.status(500).send("RefreshToken not exist ");
+    // const response = await RefreshToken.deleteOne({ userName });
+    // console.log("RefreshToken detail in logout ", refreshToken);
     // console.log("RefreshToken detail in logout ",response);
     return res.status(200).send({
       msg: "Logout Successful",
-      response,
+      // response,
       Time: Date.now()
     });
   } catch (error) {

@@ -1,12 +1,8 @@
-import axios from "axios";
-// axios.defaults.baseURL = "http://localhost:8000"
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-
+import api from "./api";
 export async function userLogin(userDetails){
   console.log(userDetails);
-
   try {
-    const response = await axios.post("/api/login",userDetails)
+    const response = await api.post("/api/login",userDetails)
     const { accessToken } = response.data;
     console.log("response data in login page", response.data.userDetails.userName);
     localStorage.setItem('accessToken', accessToken);
@@ -22,7 +18,7 @@ export async function userLogout(userName){
   console.log(userName);
   console.log(process.env.REACT_APP_SERVER_DOMAIN)
   try{
-    await axios.delete('api/logout',{
+    await api.delete('/api/logout',{
       data: {
         userName: userName,
       },
@@ -40,7 +36,7 @@ export async function userLogout(userName){
 export async function getComments(query){
   try{
     console.log("query:", query)
-    const response = await axios.get(`/api/getcomments/${query}`)
+    const response = await api.get(`/api/getcomments/${query}`)
     console.log("this is response",response.data.comments)
     return {
       success: true,
@@ -56,7 +52,7 @@ export async function getComments(query){
 
 export async function getTags(){
   try{
-    const response = await axios.get('/api/gettags');
+    const response = await api.get('/api/gettags');
     console.log(response)
     return {
       success: true,
@@ -77,7 +73,7 @@ export async function postComment(title, mtags, description) {
   };
   const tagsArray = capitalizeWords(mtags);
   try {
-    const response = await axios.post('/api/postcomment',{
+    const response = await api.post('/api/postcomment',{
       data:{
         tags:tagsArray,
         topicTitle:title,
@@ -108,7 +104,7 @@ export async function postComment(title, mtags, description) {
 export async function getProblems(query){
   try {
     console.log("e",query);
-    const response = await axios.post('/api/getproblems',{query});
+    const response = await api.post('/api/getproblems',{query});
     return response.data;
   } catch (error) {
     return error;

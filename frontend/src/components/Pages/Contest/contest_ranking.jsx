@@ -1,8 +1,9 @@
 function ContestRanking({rank}) {
+  const avatarNo = Math.floor(Math.random()*6)
   return (
     <div className="flex gap-4 items-center">
       <div>{rank}</div>
-      <img className="rounded-full h-12" src="https://assets.leetcode.com/users/default_avatar.jpg" alt="Error" />
+      <img className="rounded-full h-10 w-10" src={`/avatar/avatar${avatarNo}.png`} alt="Error" />
       <div>
         <div className="text-sm font-semibold">Player Name</div>
         <div className="flex gap-4 text-xs">

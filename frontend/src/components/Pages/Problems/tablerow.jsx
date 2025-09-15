@@ -11,7 +11,7 @@ function TableRow({prop}) {
 			<div className="w-16">--</div>
 			<div className="w-[128px]">{prop.acRate}%</div>
 			<div className={`w-[112px] ${prop.difficulty === "Medium" ? "text-[#e6e633]" : prop.difficulty === "Easy" ? "text-[#18ba2b]" : "text-[#D14343]"} `}>{prop.difficulty}</div>
-			<div className="">Frequency</div>
+			<div className="">{Math.floor(Math.random()*60)+30}%</div>
 		</a>
 	)
 }

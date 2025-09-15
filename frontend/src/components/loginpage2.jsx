@@ -51,7 +51,12 @@ function ModernForm() {
             console.log(user)
         }
     }
-
+    function handleDemoCredential(){
+        setUser({
+            userName: "admin",
+            password: "123456@123"
+        })
+    }
     return (
         <div className="container mx-auto">
             <div className="formbox bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -63,6 +68,7 @@ function ModernForm() {
                     <input type="password" placeholder="Password" className="input-field mb-4 pl-2 py-3" value={user.password} onChange={(e) => handleChange('password', e.target.value)} />
                     <a href="#" className="text-blue-500 block mb-4">Forget Password</a>
                     <button type="submit" className="bg-[#5851e3] w-full py-4 rounded-md">Login</button>
+                    <button onClick={handleDemoCredential} className="bg-[#5851e3] w-full py-4 rounded-md mt-3">Demo Login</button>
 
                     <p className="text-center m-2">Not a member?<Link  className=" text-[#5851e3] underline  rounded-md px-1" to='/register'>Register Now</Link></p>
                 </form>
